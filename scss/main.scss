@@ -1,3 +1,2 @@
 // Parent entry that exposes globals/variables only
-@import 'variables';
-@import 'globals';
+@use 'shared' as *;
