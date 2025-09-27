@@ -6,11 +6,10 @@ const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass')(require('sass'));
 const rename = require('gulp-rename');
-
-const esbuild = require('esbuild'); // ← use native esbuild API (reliable)
+const esbuild = require('esbuild');
 
 const paths = {
-  scss: 'scss/**/*.scss',
+  scss: 'src/scss/**/*.scss',
   js: 'src/js/**/*.js',
   outCss: 'dist/css',
   outJs: 'dist/js',
@@ -31,7 +30,7 @@ function clean() {
    ====================== */
 
 function stylesMain() {
-  return gulp.src(['scss/main.scss'], { allowEmpty: true })
+  return gulp.src(['src/scss/main.scss'], { allowEmpty: true })
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(
