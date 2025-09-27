@@ -37,17 +37,41 @@
     }
     add_filter('upload_mimes', 'twwp_whitelist_mimetype_uploads');
 
-    // Add custom logo support
-    function twwp_add_custom_logo_support() {
+    // Add theme supports
+    function twwp_add_theme_support() {
 
+        // Custom logo
         add_theme_support('custom-logo', array(
             'height'      => 80,
             'width'       => 240,
             'flex-height' => true,
             'flex-width'  => true,
         ));
+
+        // Title tag
+        add_theme_support('title-tag');
+
+        // Featured images (post thumbnails)
+        add_theme_support('post-thumbnails');
+
+        // Switch default core markup to HTML5 output
+        add_theme_support('html5', array(
+            'search-form',
+            'comment-form',
+            'comment-list',
+            'gallery',
+            'caption',
+            'script',
+            'style',
+        ));
+
+        // Enable wide / full-width alignment in the block editor
+        add_theme_support('align-wide');
+
+        // Responsive <img> attributes
+        add_theme_support('responsive-embeds');
     }
-    add_action('after_setup_theme', 'twwp_add_custom_logo_support', 5);
+    add_action('after_setup_theme', 'twwp_add_theme_support', 5);
 
     // Register the primary (default) navigation menu
     function twwp_register_default_primary_menu() {
