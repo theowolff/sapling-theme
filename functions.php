@@ -8,3 +8,4 @@
     require_once __DIR__ . '/extras/helpers.php';
     require_once __DIR__ . '/extras/setup.php';
     require_once __DIR__ . '/extras/theme-functions.php';
+    require_once __DIR__ . '/extras/includes/menu-walker.php';

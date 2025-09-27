@@ -81,3 +81,16 @@
         ));
     }
     add_action('after_setup_theme', 'splng_register_default_primary_menu', 5);
+
+    // Force the theme's menu walker on all menus and locations
+    function splng_force_anchor_classes_walker($args) {
+
+        // If another walker was explicitly passed, respect it.
+        if(! empty($args['walker']) && $args['walker'] instanceof Walker_Nav_Menu) {
+            return $args;
+        }
+
+        $args['walker'] = new Sapling_Anchor_Classes_Walker();
+        return $args;
+    }
+    add_filter('wp_nav_menu_args', 'splng_force_anchor_classes_walker');
