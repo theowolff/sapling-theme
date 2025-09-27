@@ -13,7 +13,7 @@
                     /**
                      * Fire the footer content hook.
                      **/
-                    do_action('twwp/footer');
+                    do_action('sapling/footer');
                 ?>
             </div>
         </footer>

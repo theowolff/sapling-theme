@@ -1,7 +1,7 @@
 <?php
     // Constant for assets
-    if(! defined('TWWP_DIST')) {
-        define('TWWP_DIST', get_template_directory_uri() . '/dist');
+    if(! defined('SPLNG_DIST')) {
+        define('SPLNG_DIST', get_template_directory_uri() . '/dist');
     }
 
     // Wire extras: core files
