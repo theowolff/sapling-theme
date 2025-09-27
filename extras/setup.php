@@ -36,3 +36,24 @@
         return $mimes;
     }
     add_filter('upload_mimes', 'twwp_whitelist_mimetype_uploads');
+
+    // Add custom logo support
+    function twwp_add_custom_logo_support() {
+
+        add_theme_support('custom-logo', array(
+            'height'      => 80,
+            'width'       => 240,
+            'flex-height' => true,
+            'flex-width'  => true,
+        ));
+    }
+    add_action('after_setup_theme', 'twwp_add_custom_logo_support', 5);
+
+    // Register the primary (default) navigation menu
+    function twwp_register_default_primary_menu() {
+
+        register_nav_menus(array(
+            'primary' => __('Primary Menu', get_stylesheet()),
+        ));
+    }
+    add_action('after_setup_theme', 'twwp_register_default_primary_menu', 5);
