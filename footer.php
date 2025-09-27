@@ -8,7 +8,7 @@
 ?>
 
         <footer class="site-footer" id="colophon">
-            <div class="site-info">
+            <div class="container">
                 <?php
                     /**
                      * Fire the footer content hook.

@@ -16,7 +16,7 @@
     <?php do_action('wp_body_open'); ?>
 
     <header class="site-header" role="banner" id="masthead">
-        <div class="site-header__inner">
+        <div class="container">
             <div class="site-branding">
                 <?php
                     if (function_exists('the_custom_logo') && has_custom_logo()) {
@@ -31,18 +31,18 @@
             </div>
 
             <nav class="site-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Menu', get_stylesheet()); ?>">
-            <?php
-                wp_nav_menu(array(
-                    'theme_location' => 'primary',
-                    'container' => false,
-                    'menu_class' => 'menu menu--primary',
-                    'fallback_cb' => function () {
-                        echo '<ul class="menu menu--primary"><li><a href="' . esc_url(admin_url('nav-menus.php')) . '">' .
-                            esc_html__('Add a menu', get_stylesheet()) . '</a></li></ul>';
-                    },
-                    'depth' => 2,
-                ));
-            ?>
+                <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'primary',
+                        'container' => false,
+                        'menu_class' => 'menu menu--primary',
+                        'fallback_cb' => function () {
+                            echo '<ul class="menu menu--primary"><li><a href="' . esc_url(admin_url('nav-menus.php')) . '">' .
+                                esc_html__('Add a menu', get_stylesheet()) . '</a></li></ul>';
+                        },
+                        'depth' => 2,
+                    ));
+                ?>
             </nav>
         </div>
     </header>
