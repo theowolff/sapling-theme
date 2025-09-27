@@ -1,9 +1,15 @@
 <?php
     /**
      * Theme setup & bootstrap: enqueue, supports, analytics placeholders.
+     *
+     * @package sapling-theme
+     * @author theowolff
      */
 
-    // Enqueue styles and scripts
+    /**
+     * Enqueue theme styles and scripts, localize frontend data, and handle comment reply script.
+     * @return void
+     */
     function splng_enqueue_styles_scripts() {
         global $wp;
         $the_theme = wp_get_theme();
@@ -29,7 +35,11 @@
     }
     add_action('wp_enqueue_scripts', 'splng_enqueue_styles_scripts');
 
-    // Allow JSON and SVG media library uploads
+    /**
+     * Allow JSON and SVG media library uploads.
+     * @param array $mimes
+     * @return array
+     */
     function splng_whitelist_mimetype_uploads($mimes) {
         $mimes['json'] = 'text/plain';
         $mimes['svg'] = 'image/svg+xml';
@@ -37,7 +47,10 @@
     }
     add_filter('upload_mimes', 'splng_whitelist_mimetype_uploads');
 
-    // Add theme supports
+    /**
+     * Add theme supports for logo, title, thumbnails, HTML5, wide alignment, and responsive embeds.
+     * @return void
+     */
     function splng_add_theme_support() {
 
         // Custom logo
@@ -73,7 +86,10 @@
     }
     add_action('after_setup_theme', 'splng_add_theme_support', 5);
 
-    // Register the primary (default) navigation menu
+    /**
+     * Register the primary (default) navigation menu.
+     * @return void
+     */
     function splng_register_default_primary_menu() {
 
         register_nav_menus(array(
@@ -82,7 +98,11 @@
     }
     add_action('after_setup_theme', 'splng_register_default_primary_menu', 5);
 
-    // Force the theme's menu walker on all menus and locations
+    /**
+     * Force the theme's menu walker on all menus and locations unless another walker is passed.
+     * @param array $args
+     * @return array
+     */
     function splng_force_anchor_classes_walker($args) {
 
         // If another walker was explicitly passed, respect it.

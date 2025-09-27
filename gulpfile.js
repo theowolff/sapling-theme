@@ -50,10 +50,10 @@ function stylesMain() {
   ====================== */
 
 function scripts() {
-  // discover entry points (e.g., main.js, admin.js)
+  // Discover entry points (e.g., main.js, admin.js)
   const srcDir = 'src/js';
   if (!fs.existsSync(srcDir)) {
-    // nothing to build, ensure out dir exists to avoid errors
+    // Nothing to build, ensure out dir exists to avoid errors
     fs.mkdirSync(paths.outJs, { recursive: true });
     return Promise.resolve();
   }
@@ -67,7 +67,7 @@ function scripts() {
     return Promise.resolve();
   }
 
-  // ensure outdir exists
+  // Ensure outdir exists
   fs.mkdirSync(paths.outJs, { recursive: true });
 
   return esbuild.build({
@@ -76,11 +76,11 @@ function scripts() {
     bundle: true,
     format: 'iife',
     target: ['es2018'],
-    sourcemap: true,     // always
-    minify: true,        // always
-    entryNames: '[name].min', // outputs main.min.js, admin.min.js
+    sourcemap: true,
+    minify: true,
+    entryNames: '[name].min',
     legalComments: 'none',
-    logLevel: 'silent',  // change to 'info' if you want logs
+    logLevel: 'silent',
   });
 }
 

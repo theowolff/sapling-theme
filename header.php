@@ -1,6 +1,9 @@
 <?php
     /**
      * The theme's Header template
+     * 
+     * @package sapling-theme
+     * @author theowolff
      */
     defined('ABSPATH') || exit;
 ?>

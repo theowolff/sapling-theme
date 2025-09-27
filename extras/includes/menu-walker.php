@@ -2,6 +2,9 @@
 /**
  * Walker that applies *custom* menu item classes to <a> instead of <li>.
  * Structural/core classes remain on <li> (e.g., current-menu-item).
+ *
+ * @package sapling-theme
+ * @author theowolff
  */
 
 defined('ABSPATH') || exit;
