@@ -1,4 +1,3 @@
-
 <?php
     /**
      * Main index template for displaying posts.

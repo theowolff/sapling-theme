@@ -1,4 +1,3 @@
-
 <?php
     /**
      * Theme bootstrap: constants and core includes.

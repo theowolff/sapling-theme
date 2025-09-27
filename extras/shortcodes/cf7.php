@@ -1,4 +1,3 @@
-
 <?php
     /**
      * Prints out a sanitized Contact Form 7 form by ID.
