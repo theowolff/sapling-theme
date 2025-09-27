@@ -13,6 +13,7 @@
      * @return bool
      */
     function splng_skip_cf7_emails_conditionally($cf7) {
+
         // Default - skip.
         return true;
     }
@@ -24,6 +25,7 @@
      * @return array
      */
     function splng_page_slug_body_class($classes) {
+
         if(is_singular('page') || is_home()) {
             $page_obj  = get_post(is_home() ? get_option('page_for_posts') : get_the_ID());
             $classes[] = "page--{$page_obj->post_name}";
@@ -34,6 +36,7 @@
                 $classes[]  = "page-parent--{$parent_obj->post_name}";
             }
         }
+        
         return $classes;
     }
     add_action('body_class', 'splng_page_slug_body_class');

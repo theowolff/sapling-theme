@@ -72,9 +72,11 @@
      */
     if(! function_exists('splng_acf_image')) {
         function splng_acf_image($field_name, $post_id = null) {
+            
             if(empty($post_id)) {
                 $post_id = get_the_ID();
             }
+
             return splng_cast_image_array(
                 get_field($field_name, $post_id)
             );
@@ -88,6 +90,7 @@
      */
     if(! function_exists('splng_cast_image_array')) {
         function splng_cast_image_array($value) {
+            
             return is_array($value) ? $value
                 : (is_int($value)
                     ? array(
