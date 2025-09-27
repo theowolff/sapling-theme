@@ -9,12 +9,14 @@
         $the_theme = wp_get_theme();
         
         /** Styles */
-        wp_register_style('twwp-main', TWWP_DIST . '/css/main.min.css', [], $the_theme->get('Version'));
+        wp_register_style('twwp-main', TWWP_DIST . '/css/main.min.css', array(), $the_theme->get('Version'));
+        wp_enqueue_style('twwp-main');
 
         /** Scripts **/
         wp_enqueue_script('jquery');
-        wp_register_script('twwp-main', TWWP_DIST . '/js/main.js', [], $the_theme->get('Version'), true);
-        
+        wp_register_script('twwp-main', TWWP_DIST . '/js/main.js', array('jquery'), $the_theme->get('Version'), true);
+        wp_enqueue_script('twwp-main');
+
         // Localize important data to be used in the frontend
         $localized = array(
             'home_url'     => rtrim(get_home_url(), '/'),
