@@ -1,2 +1,78 @@
-/* Global site-wide styles (parent) */
-:root { --brand-hue: 210; }
+/* =====================================================================
+   Global Reset / Base Styles
+   ===================================================================== */
+
+/* 1. Set border-box for all elements */
+html {
+    box-sizing: border-box;
+    -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* 2. Remove default margins & paddings */
+body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+    margin: 0;
+    padding: 0;
+}
+
+/* 3. Set base body styles */
+body {
+    min-height: calc(var(--vh) * 100);
+    font-family: $font-stack;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased; /* Better text rendering */
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* 4. Remove list styles */
+ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 5. Reset links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 6. Reset images/media */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 7. Reset form elements */
+button, input, select, textarea {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    outline: none;
+    line-height: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* 8. Tables */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* 9. Default scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
