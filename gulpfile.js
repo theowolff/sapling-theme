@@ -9,10 +9,19 @@ const rename = require('gulp-rename');
 const esbuild = require('esbuild');
 
 const paths = {
+  // Theme sources
   scss: 'src/scss/**/*.scss',
   js: 'src/js/**/*.js',
+
+  // Vendor sources (manual files you add to the theme repo)
+  vendorCss: 'src/vendor/css/**/*.{css,map}',
+  vendorJs: 'src/vendor/js/**/*.{js,map}',
+
+  // Outputs
   outCss: 'dist/css',
   outJs: 'dist/js',
+  outVendorCss: 'dist/vendor/css',
+  outVendorJs: 'dist/vendor/js',
 };
 
 function clean() {
@@ -46,14 +55,12 @@ function stylesMain() {
 }
 
 /* ======================
-  JS — always sourcemaps + minify
-  ====================== */
+   JS — always sourcemaps + minify
+   ====================== */
 
 function scripts() {
-  // Discover entry points (e.g., main.js, admin.js)
   const srcDir = 'src/js';
   if (!fs.existsSync(srcDir)) {
-    // Nothing to build, ensure out dir exists to avoid errors
     fs.mkdirSync(paths.outJs, { recursive: true });
     return Promise.resolve();
   }
@@ -67,7 +74,6 @@ function scripts() {
     return Promise.resolve();
   }
 
-  // Ensure outdir exists
   fs.mkdirSync(paths.outJs, { recursive: true });
 
   return esbuild.build({
@@ -85,20 +91,51 @@ function scripts() {
 }
 
 /* ======================
-  Watch / Tasks
-  ====================== */
+   Vendors — copy-only (no bundling, no transform)
+   Place files under:
+   - src/vendor/css/...   → dist/vendor/css/...
+   - src/vendor/js/...    → dist/vendor/js/...
+   ====================== */
+
+function vendorCss() {
+  return gulp.src(paths.vendorCss, { allowEmpty: true })
+    .pipe(plumber())
+    .pipe(gulp.dest(paths.outVendorCss));
+}
+
+function vendorJs() {
+  return gulp.src(paths.vendorJs, { allowEmpty: true })
+    .pipe(plumber())
+    .pipe(gulp.dest(paths.outVendorJs));
+}
+
+/* ======================
+   Watch / Tasks
+   ====================== */
 
 function watchAll() {
   gulp.watch(paths.scss, stylesMain);
   gulp.watch(paths.js, scripts);
+
+  // Vendor assets
+  gulp.watch(paths.vendorCss, vendorCss);
+  gulp.watch(paths.vendorJs, vendorJs);
 }
 
-const dev = gulp.series(clean, gulp.parallel(stylesMain, scripts));
-const build = gulp.series(clean, gulp.parallel(stylesMain, scripts));
+const dev = gulp.series(
+  clean,
+  gulp.parallel(stylesMain, scripts, vendorCss, vendorJs)
+);
+
+const build = gulp.series(
+  clean,
+  gulp.parallel(stylesMain, scripts, vendorCss, vendorJs)
+);
 
 exports.clean = clean;
 exports.styles = stylesMain;
 exports.scripts = scripts;
+exports.vendors = gulp.parallel(vendorCss, vendorJs);
 exports.dev = dev;
 exports.build = build;
 exports.watch = gulp.series(dev, watchAll);

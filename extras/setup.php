@@ -15,10 +15,14 @@
         $the_theme = wp_get_theme();
         
         /** Styles */
+        wp_enqueue_style("sapling-slick", SPLNG_DIST . '/vendor/css/slick.css', array(), $the_theme->get('Version'));
+        wp_enqueue_style("sapling-micromodal", SPLNG_DIST . '/vendor/css/micromodal.css', array(), $the_theme->get('Version'));
         wp_enqueue_style('sapling-main', SPLNG_DIST . '/css/main.min.css', array(), $the_theme->get('Version'));
 
         /** Scripts **/
         wp_enqueue_script('jquery');
+        wp_enqueue_script("sapling-slick", SPLNG_DIST . '/vendor/js/slick.min.js', array('jquery'), $the_theme->get('Version'), true);
+        wp_enqueue_script("sapling-micromodal", SPLNG_DIST . '/vendor/js/micromodal.min.js', array('jquery'), $the_theme->get('Version'), true);
         wp_enqueue_script('sapling-main', SPLNG_DIST . '/js/main.min.js', array('jquery'), $the_theme->get('Version'), true);
 
         // Localize important data to be used in the frontend
