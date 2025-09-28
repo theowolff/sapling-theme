@@ -11,6 +11,35 @@ jQuery(($) => {
     $(window).on('load resize', set_vh);
     $(window).on('orientationchange', () => setTimeout(set_vh, 100));
 
+    /** Micromodal.js **/
+    // Init:
+    MicroModal.init();
+
+    // Open modal on '#modal--*' click
+    $(document).on('click', 'a[href*="#modal--"]', (e) => {
+        e.preventDefault();
+
+        /**
+         * Get the modal name from the href.
+         */
+        let slug = $(e.currentTarget).attr('href').replace('#modal--', ''),
+            modal = $(`#${slug}.modal`);
+
+        // Show the modal
+        MicroModal.show(slug , {
+
+            /** 
+             * Throw generic onClose and onShow events 
+             */
+            onShow: function() {
+                modal.trigger('sapling-modal-shown');
+            },
+            onClose: function() {
+                modal.trigger('sapling-modal-closed');
+            }
+        });
+    });
+
     /** Contact Form 7: Add the default response output classes back **/
     // On success:
     $(document).on('wpcf7mailsent', '.wpcf7', (e) => {

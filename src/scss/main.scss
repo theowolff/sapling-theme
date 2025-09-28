@@ -1,2 +1,34 @@
-// Parent entry that exposes globals/variables only
+@use 'mixins' as *;
 @use 'globals';
+
+// Micromodal z-index fix
+.modal {
+    display: block !important;
+
+    &[aria-hidden="true"] {
+
+        .modal {
+
+            &__overlay {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+    }
+
+    .modal {
+
+        &__overlay {
+            transition: 0.5s all;
+            z-index: 9999;
+
+            .admin-bar & {
+                top: 32px;
+
+                @include down(sm) {
+                    top: 46px;
+                }
+            }
+        }
+    }
+}
