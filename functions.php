@@ -13,6 +13,10 @@
         define('SPLNG_DIST', get_template_directory_uri() . '/dist');
     }
 
+    if(! defined('SPLNG_DIST_PATH')) {
+        define('SPLNG_DIST_PATH', get_template_directory() . '/dist');
+    }
+
     /**
      * Wire extras: core files.
      */
