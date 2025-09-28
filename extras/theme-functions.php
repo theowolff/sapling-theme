@@ -39,3 +39,33 @@
         return $classes;
     }
     add_action('body_class', 'splng_page_slug_body_class');
+
+    /**
+     * Add a menu icon if set in ACF for the menu item.
+     * @param array $items
+     * @param object $args
+     * @return array
+     */
+    function splng_add_menu_item_icon( $items, $args ) {
+        
+        /** 
+         * Loop through menu items and add icon if set.
+         */
+        foreach($items as &$item) {
+            
+            /**
+             * Get icon field value.
+             */
+            $icon = splng_acf_image('splng__menu-item_icon', $item);
+            
+            /**
+             * Append icon HTML to menu item title if icon is set.
+             */
+            if($icon) {
+                $item->title .= splng_html_image($icon);
+            }
+        }
+        
+        return $items;
+    }
+    add_filter('wp_nav_menu_objects', 'splng_add_menu_item_icon', 10, 2);
