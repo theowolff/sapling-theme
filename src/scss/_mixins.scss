@@ -1,0 +1,44 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'variables' as v;
+
+// Media Queries
+// Helper: get value by key
+@function bp($key) {
+    @return map.get(v.$breakpoints, $key);
+}
+
+// Up: min-width
+@mixin up($key) {
+    @media only screen and (min-width: #{bp($key)}) {
+        @content;
+    }
+}
+
+// Down: max-width
+@mixin down($key) {
+    @media only screen and (max-width: #{bp($key)}) {
+        @content;
+    }
+}
+
+// Between: range
+@mixin between($start, $end) {
+    @media (min-width: #{bp($start)}) and (max-width: #{bp($end) - 1px}) {
+        @content;
+    }
+}
+
+// Only: exact breakpoint range
+@mixin only($key) {
+    $next: null;
+    $keys: map.keys(v.$breakpoints);
+    $index: list.index($keys, $key);
+
+    @if $index and $index < list.length($keys) {
+    $next: list.nth($keys, $index + 1);
+        @include between($key, $next) { @content; }
+    } @else {
+        @include up($key) { @content; }
+    }
+}
