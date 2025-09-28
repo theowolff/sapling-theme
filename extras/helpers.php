@@ -30,6 +30,18 @@
     }
 
     /**
+     * Inject classes into wpautop generated <p> tags.
+     * @param string $string
+     * @param string $classes
+     * @return string
+     */
+    if(! function_exists('splng_autop')) {
+        function splng_autop($string, $classes = null) {
+            return str_replace('<p>', $classes ? "<p class=\"$classes\">" : '', wpautop($string));
+        }
+    }
+
+    /**
      * Remove <br> tags from string.
      * @param string $string
      * @return string
@@ -50,6 +62,23 @@
         function splng_template_part($name, $args = array()) {
             extract($args);
             include dirname(__DIR__) . "/partial-templates/{$name}.php";
+        }
+    }
+    
+    /**
+     * Inject content into the modal skeleton and get it.
+     * @param string title
+     * @param string content
+     * @param string slug
+     * @param boolean close
+     */
+    if(! function_exists('splng_modal')) {
+        function splng_modal($slug, $content, $title = null, $close = true) {
+
+            /**
+             * Include the skeleton file.
+             */
+            include dirname(__DIR__) . "/partial-templates/partials/modals/_skeleton.php";
         }
     }
 
@@ -78,7 +107,7 @@
             }
 
             return splng_cast_image_array(
-                get_field($field_name, $post_id)
+                $post_id === 'sub' ? get_sub_field($field_name) : get_field($field_name, $post_id)
             );
         }
     }
