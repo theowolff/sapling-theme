@@ -78,3 +78,31 @@ table {
 html {
     scroll-behavior: smooth;
 }
+
+/* Wordpress or plugin-specific */
+// Contact Form 7
+.wpcf7 {
+
+    .wpcf7-form {
+
+        .wpcf7 {
+
+            &-spinner {
+                display: none !important;
+            }
+
+            &-response-output {
+
+                &:not(.wpcf7-mail-sent-ok) {
+                    display: none !important;
+                }
+
+                &.wpcf7-mail-sent-ok {
+                    margin: 0;
+                    padding: 0;
+                    border: none;
+                }
+            }
+        }
+    }
+}
