@@ -13,15 +13,17 @@ jQuery(($) => {
 
     /** Contact Form 7: Add the default response output classes back **/
     // On success:
-    $(document).on('wpcf7mailsent', '.wpcf7', function () {
-        $(this).find('.wpcf7-response-output')
+    $(document).on('wpcf7mailsent', '.wpcf7', (e) => {
+        const form = $(e.currentTarget);
+
+        form.find('.wpcf7-response-output')
             .removeClass('wpcf7-validation-errors')
             .addClass('wpcf7-mail-sent-ok');
     });
 
     // On error:
-    $(document).on('wpcf7invalid wpcf7spam wpcf7mailfailed', '.wpcf7', function () {
-        const form = $(this);
+    $(document).on('wpcf7invalid wpcf7spam wpcf7mailfailed', '.wpcf7', (e) => {
+        const form = $(e.currentTarget);
 
         setTimeout(() => {
             form.find('.wpcf7-response-output')
@@ -36,8 +38,10 @@ jQuery(($) => {
     });
 
     // Contact Form 7: Reset the invalid classes on input / textarea keyup
-    $(document).on('keyup', '.wpcf7-form input, .wpcf7-form textarea', function () {
-        $(this).removeClass('wpcf7-not-valid')
+    $(document).on('keyup', '.wpcf7-form input, .wpcf7-form textarea', (e) => {
+        const input = $(e.currentTarget);
+
+        input.removeClass('wpcf7-not-valid')
             .closest('label')
             .removeClass('wpcf7-not-valid')
             .find('.wpcf7-not-valid-tip')
@@ -55,7 +59,7 @@ jQuery(($) => {
 
     // On a link with a hash click, scroll to that section
     $(document).on('click', 'a[href*="#"]', (e) => {
-        const href = e.currentTarget.getAttribute('href');
+        const href = $(e.currentTarget).attr('href');
         if (!href || href === '#') return;
 
         const id = href.replace('#', '').replace('/', '');
