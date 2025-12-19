@@ -45,6 +45,8 @@
                         },
                         'depth' => 2,
                     ));
+                    /* Run an action after the primary menu */
+                    do_action('splng_after_primary_menu');
                 ?>
             </nav>
         </div>
