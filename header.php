@@ -34,6 +34,8 @@
             </div>
 
             <nav class="site-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Menu', get_stylesheet()); ?>">
+                <?php get_template_part('partial-templates/partials/hamburger'); ?>
+
                 <?php
                     wp_nav_menu(array(
                         'theme_location' => 'primary',
@@ -49,5 +51,12 @@
                     do_action('splng_after_primary_menu');
                 ?>
             </nav>
+
+            <?php
+                /* Run an action after the site navigation */
+                do_action('splng_after_site_navigation');
+            ?>
+
+            <?php get_template_part('partial-templates/partials/hamburger'); ?>
         </div>
     </header>

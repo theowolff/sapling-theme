@@ -1,6 +1,6 @@
 /* Default variables here */
 $breakpoints: (
-  xs: 475px,
+  xs: 475,
   sm: 782px,
   md: 1024px,
   lg: 1200px,
@@ -8,3 +8,7 @@ $breakpoints: (
 );
 
 $font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+/* Colors */
+$black: #000;
+$white: #fff;

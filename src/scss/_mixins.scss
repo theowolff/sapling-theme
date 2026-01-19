@@ -42,3 +42,9 @@
         @include up($key) { @content; }
     }
 }
+
+// Pseudo elements basic initialization
+@mixin pseudo-el {
+    content: '';
+    display: block;
+}

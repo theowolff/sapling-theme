@@ -154,4 +154,19 @@ jQuery(($) => {
 
     // And also on scroll
     $(window).on('scroll', header_set_scrolled_class);
+
+    /** 
+     * Mobile: toggle top menu on hamburger click 
+     */
+    $('.site-hamburger').on('click', function(e) {
+        e.preventDefault();
+        toggle_site_navigation();
+    });
+
+    const toggle_site_navigation = () => {
+        const hamburger = $('.site-hamburger');
+        const site_nav = $('.site-navigation');
+        hamburger.toggleClass('is-active');
+        site_nav.toggleClass('is-open');
+    };
 });

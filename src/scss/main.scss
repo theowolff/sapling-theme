@@ -1,5 +1,6 @@
 @use 'mixins' as *;
 @use 'globals';
+@use 'partials';
 
 // Micromodal z-index fix
 .modal {
