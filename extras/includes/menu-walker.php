@@ -24,14 +24,14 @@ if (!class_exists('Sapling_Anchor_Classes_Walker')) {
     public function start_el(&$output, $item, $depth = 0, $args = [], $id = 0) {
       $indent = ($depth) ? str_repeat("\t", $depth) : '';
 
-      // 1) Get the "custom classes" defined in the menu item UI.
       $custom_classes = get_post_meta($item->ID, '_menu_item_classes', true);
       $custom_classes = is_array($custom_classes) ? array_filter($custom_classes) : [];
 
-      // 2) Build <li> classes *excluding* those custom classes.
+      $anchor_classes = array_filter($custom_classes, fn($c) => strpos($c, 'hide-') !== 0);
+
       $li_classes = is_array($item->classes) ? array_filter($item->classes) : [];
-      if (!empty($custom_classes)) {
-        $li_classes = array_diff($li_classes, $custom_classes);
+      if (!empty($anchor_classes)) {
+        $li_classes = array_diff($li_classes, $anchor_classes);
       }
 
       // Standard li classes cleanup.
@@ -52,14 +52,12 @@ if (!class_exists('Sapling_Anchor_Classes_Walker')) {
       $atts['rel']    = !empty($item->xfn) ? $item->xfn : '';
       $atts['href']   = !empty($item->url) ? $item->url : '';
 
-      // Merge custom classes into the <a> class attribute.
       $link_classes = [];
-      // If any existing link classes passed in via args/filter, respect them:
       if (!empty($args->link_class)) {
         $link_classes[] = $args->link_class;
       }
-      if (!empty($custom_classes)) {
-        $link_classes = array_merge($link_classes, $custom_classes);
+      if (!empty($anchor_classes)) {
+        $link_classes = array_merge($link_classes, $anchor_classes);
       }
       $link_classes = array_unique(array_filter(array_map('trim', $link_classes)));
       if (!empty($link_classes)) {
