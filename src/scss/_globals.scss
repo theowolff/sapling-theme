@@ -79,6 +79,73 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Utilities */
+// Hide on various breakpoints
+.hide {
+
+    &-from {
+
+        &-sm {
+
+            @include up(sm) {
+                display: none !important;
+            }
+        }
+
+        &-md {
+
+            @include up(md) {
+                display: none !important;
+            }
+        }
+
+        &-lg {
+
+            @include up(lg) {
+                display: none !important;
+            }
+        }
+
+        &-xl {
+
+            @include up(xl) {
+                display: none !important;
+            }
+        }
+    }
+    
+    &-to {
+
+        &-sm {
+
+            @include down(sm) {
+                display: none !important;
+            }
+        }
+
+        &-md {
+
+            @include down(md) {
+                display: none !important;
+            }
+        }
+
+        &-lg {
+
+            @include down(lg) {
+                display: none !important;
+            }
+        }
+
+        &-xl {
+
+            @include down(xl) {
+                display: none !important;
+            }
+        }
+    }
+}
+
 /* Wordpress or plugin-specific */
 // Contact Form 7
 .wpcf7 {
