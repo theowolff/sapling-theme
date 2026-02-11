@@ -61,8 +61,9 @@
             /**
              * Append icon HTML to menu item title if icon is set.
              */
-            if($icon) {
-                $item->title .= splng_html_image($icon);
+            if($icon && $icon['url']) {
+                $icon_html    = splng_html_image($icon);
+                $item->title .= "<figure>{$icon_html}</figure>";
             }
         }
         
